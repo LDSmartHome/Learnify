@@ -37,9 +37,6 @@ dependencies:
   dio: ^4.0.6
   dio_cookie_manager: ^2.0.0
   cookie_jar: ^3.0.1
-  #requests:
-  #  git:
-  #    url: https://github.com/LDSmartHome/requests
 
 dev_dependencies:
   flutter_test:

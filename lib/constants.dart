@@ -1,2 +1,5 @@
+const String apiUrl = "https://localhost";
 
-const String apiUrl="http://127.0.0.1";
+const String apiLogin = "$apiUrl/login";
+const String apiRegister = "$apiUrl/register";
+const String apiIsLogin = "$apiUrl/islogin";

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:learnify/constants.dart';
+import 'package:learnify/menu.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SignInScreen();
+  State<StatefulWidget> createState() => _SignUpScreen();
 }
 
-class _SignInScreen extends State<SignInScreen> {
+class _SignUpScreen extends State<SignUpScreen> {
   final TextEditingController _username = TextEditingController();
+  final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   bool _notEmpty = false;
@@ -20,7 +22,9 @@ class _SignInScreen extends State<SignInScreen> {
   }
 
   void _validate(String data) {
-    if (_username.text.isEmpty || _password.text.isEmpty) {
+    if (_username.text.isEmpty ||
+        _password.text.isEmpty ||
+        _email.text.isEmpty) {
       setState(() {
         _notEmpty = false;
       });
@@ -60,17 +64,33 @@ class _SignInScreen extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
+    return MenuWidget(
+      title: "Sign Up",
       body: Center(
         child: ListView(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
           children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: const Center(
+                child: Text("Enter your Credentials:"),
+              ),
+            ),
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
                 controller: _username,
                 decoration: const InputDecoration(labelText: "Username"),
+                textInputAction: TextInputAction.next,
+                onChanged: _validate,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: _email,
+                decoration: const InputDecoration(labelText: "Email"),
+                textInputAction: TextInputAction.next,
                 onChanged: _validate,
               ),
             ),
@@ -79,7 +99,22 @@ class _SignInScreen extends State<SignInScreen> {
               child: TextField(
                 controller: _password,
                 decoration: const InputDecoration(labelText: "Password"),
+                textInputAction: TextInputAction.done,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
                 onChanged: _validate,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed("/login");
+                  },
+                  child: const Text("Have an account? Sign in!"),
+                ),
               ),
             ),
             Container(
@@ -89,15 +124,17 @@ class _SignInScreen extends State<SignInScreen> {
                     ? null
                     : () {
                         user
-                            .login(_username.text, _password.text)
-                            .then((value) => Navigator.of(context).pop())
+                            .register(
+                                _username.text, _email.text, _password.text)
+                            .then((value) =>
+                                Navigator.of(context).pushReplacementNamed("/"))
                             .catchError((error) => {
                                   setState(() {
                                     showAlertDialog(error.toString());
                                   })
                                 });
                       },
-                child: const Text("Login"),
+                child: const Text("Sign up"),
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learnify/constants.dart';
+import 'package:learnify/menu.dart';
 
 class LogoutScreen extends StatefulWidget {
   const LogoutScreen({Key? key}) : super(key: key);
@@ -11,18 +12,13 @@ class LogoutScreen extends StatefulWidget {
 class _LogoutScreenState extends State<LogoutScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
+    return MenuWidget(
+      title: "Logout",
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             user.logout();
-            Navigator.of(context).pop();
-            user.isLogin().then((value) {
-              if (!value) {
-                Navigator.of(context).pushNamed("/login");
-              }
-            });
+            Navigator.of(context).pushReplacementNamed("/");
           },
           child: const Text("Logout"),
         ),

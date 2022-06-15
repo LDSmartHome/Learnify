@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:learnify/home.dart';
+import 'package:learnify/sign_up.dart';
 import 'package:learnify/user.dart';
 
-import 'sign_in_screen.dart';
+import 'sign_in.dart';
 import 'logout.dart';
 
 void main() => runApp(const SignUpApp());
@@ -19,6 +20,7 @@ class SignUpApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomeScreen(),
         '/login': (context) => const SignInScreen(),
+        '/register': (context) => const SignUpScreen(),
         '/logout': (context) => const LogoutScreen(),
       },
     );

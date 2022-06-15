@@ -1,6 +1,11 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: unused_import
 
-import 'sign_up_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:learnify/home.dart';
+import 'package:learnify/user.dart';
+
+import 'sign_in_screen.dart';
+import 'logout.dart';
 
 void main() => runApp(const SignUpApp());
 
@@ -12,7 +17,9 @@ class SignUpApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const SignUpScreen(),
+        '/': (context) => const HomeScreen(),
+        '/login': (context) => const SignInScreen(),
+        '/logout': (context) => const LogoutScreen(),
       },
     );
   }

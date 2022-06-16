@@ -1,12 +1,10 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
-import 'package:learnify/home.dart';
-import 'package:learnify/sign_up.dart';
-import 'package:learnify/user.dart';
-
-import 'sign_in.dart';
-import 'logout.dart';
+import 'package:learnify/pages/home.dart';
+import 'package:learnify/pages/sign_in.dart';
+import 'package:learnify/pages/sign_up.dart';
+import 'package:learnify/util/user.dart';
 
 void main() => runApp(const SignUpApp());
 
@@ -21,7 +19,6 @@ class SignUpApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/login': (context) => const SignInScreen(),
         '/register': (context) => const SignUpScreen(),
-        '/logout': (context) => const LogoutScreen(),
       },
     );
   }

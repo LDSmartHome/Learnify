@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:learnify/constants.dart';
-import 'package:learnify/menu.dart';
+import 'package:learnify/util/constants.dart';
+import 'package:learnify/widget/menu.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SignUpScreen();
+  State<StatefulWidget> createState() => _SignInScreen();
 }
 
-class _SignUpScreen extends State<SignUpScreen> {
+class _SignInScreen extends State<SignInScreen> {
   final TextEditingController _username = TextEditingController();
-  final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   bool _notEmpty = false;
@@ -22,9 +21,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   }
 
   void _validate(String data) {
-    if (_username.text.isEmpty ||
-        _password.text.isEmpty ||
-        _email.text.isEmpty) {
+    if (_username.text.isEmpty || _password.text.isEmpty) {
       setState(() {
         _notEmpty = false;
       });
@@ -65,7 +62,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return MenuWidget(
-      title: "Sign Up",
+      title: "Log In",
       body: Center(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
@@ -73,7 +70,7 @@ class _SignUpScreen extends State<SignUpScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               child: const Center(
-                child: Text("Enter your Credentials:"),
+                child: Text("Enter your Login Credentials:"),
               ),
             ),
             Container(
@@ -81,15 +78,6 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: TextField(
                 controller: _username,
                 decoration: const InputDecoration(labelText: "Username"),
-                textInputAction: TextInputAction.next,
-                onChanged: _validate,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: _email,
-                decoration: const InputDecoration(labelText: "Email"),
                 textInputAction: TextInputAction.next,
                 onChanged: _validate,
               ),
@@ -111,9 +99,9 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: Center(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed("/login");
+                    Navigator.of(context).pushReplacementNamed("/register");
                   },
-                  child: const Text("Have an account? Sign in!"),
+                  child: const Text("Have an no account? Sign up!"),
                 ),
               ),
             ),
@@ -124,8 +112,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                     ? null
                     : () {
                         user
-                            .register(
-                                _username.text, _email.text, _password.text)
+                            .login(_username.text, _password.text)
                             .then((value) =>
                                 Navigator.of(context).pushReplacementNamed("/"))
                             .catchError((error) => {
@@ -134,7 +121,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                   })
                                 });
                       },
-                child: const Text("Sign up"),
+                child: const Text("Login"),
               ),
             ),
           ],

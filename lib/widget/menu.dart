@@ -23,9 +23,9 @@ class _MenuWidgetState extends State<MenuWidget> {
     super.initState();
 
     user.isLogin().then((value) => {
-      widget.onLoginLoaded!(value),
       setState((){
         _loggedIn = value;
+        widget.onLoginLoaded!(value);
       })
     });
   }

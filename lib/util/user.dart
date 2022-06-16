@@ -61,6 +61,21 @@ class User {
     return value.data;
   }
 
+  Future<dynamic> addSet() async {
+    dynamic value;
+    value = await dio.get(apiAddSet, queryParameters: {
+      "name": "Test",
+      "type": "ValKey",
+      "data": {"key1": "key1", "key2": "val2"}
+    });
+
+    if (await value.data['success'] == false) {
+      throw Exception("addSet failed");
+    }
+
+    return value.data;
+  }
+
   Future<void> logout() async {
     await dio.get(apiLogout);
   }

@@ -12,12 +12,30 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String _message = "";
+
   @override
   Widget build(BuildContext context) {
-    return const MenuWidget(
+    return MenuWidget(
       title: "Home",
       body: Center(
-        child: Text("Home"),
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            const Text("Home"),
+            ElevatedButton(
+              onPressed: () {
+                user.addSet().then((value) => {
+                      setState(() {
+                        _message = value.toString();
+                      })
+                    });
+              },
+              child: const Text("addTest"),
+            ),
+            Text(_message)
+          ],
+        ),
       ),
     );
   }

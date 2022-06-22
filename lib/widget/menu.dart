@@ -1,15 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
 import 'package:learnify/widget/menu_items.dart';
 
 class MenuWidget extends StatefulWidget {
-  const MenuWidget(
-      {Key? key, required this.title, required this.body, this.onLoginLoaded})
+  const MenuWidget({Key? key, required this.title, required this.body})
       : super(key: key);
 
-  final Widget? body;
+  final Widget body;
   final String title;
-  final BoolCallback? onLoginLoaded;
 
   @override
   State<MenuWidget> createState() => _MenuWidgetState();
@@ -22,11 +23,12 @@ class _MenuWidgetState extends State<MenuWidget> {
   void initState() {
     super.initState();
 
-    user.isLogin().then((value) => {
-      setState((){
-        _loggedIn = value;
-        widget.onLoginLoaded!(value);
-      })
+    auth.authStateChanges().listen((User? user) {
+      if (user != null) {
+        setState(() {
+          _loggedIn = true;
+        });
+      }
     });
   }
 

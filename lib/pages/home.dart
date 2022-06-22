@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, prefer_final_fields
 
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
@@ -25,11 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text("Home"),
             ElevatedButton(
               onPressed: () {
-                user.addSet().then((value) => {
-                      setState(() {
-                        _message = value.toString();
-                      })
-                    });
               },
               child: const Text("addTest"),
             ),

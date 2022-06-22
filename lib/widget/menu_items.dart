@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
 
@@ -50,7 +52,7 @@ class _MenuItemsState extends State<MenuItems> {
             title: const Text("Logout"),
             trailing: const Icon(Icons.exit_to_app),
             onTap: () {
-              user.logout();
+              auth.signOut();
               Navigator.of(context).pushReplacementNamed("/");
             },
           ),

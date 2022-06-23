@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
 
@@ -48,6 +46,13 @@ class _MenuItemsState extends State<MenuItems> {
             },
           ),
         } else ...{
+          ListTile(
+            title: const Text("List"),
+            trailing: const Icon(Icons.view_array),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed("/list");
+            },
+          ),
           ListTile(
             title: const Text("Logout"),
             trailing: const Icon(Icons.exit_to_app),

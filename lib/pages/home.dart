@@ -1,7 +1,6 @@
-// ignore_for_file: unused_import, prefer_final_fields
-
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
+import 'package:learnify/util/dataset.dart';
 import 'package:learnify/widget/menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,8 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _message = "";
-
   @override
   Widget build(BuildContext context) {
     return MenuWidget(
@@ -25,10 +22,23 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text("Home"),
             ElevatedButton(
               onPressed: () {
+                DataSet.create("name1", DataSet.createData())
+                    .then((value) => showInfoDialog(context, "Data Added"))
+                    .catchError((error) =>
+                        showErrorDialog(context, "Failed to add data: $error"));
               },
               child: const Text("addTest"),
             ),
-            Text(_message)
+            ElevatedButton(
+              onPressed: () {
+                DataSet.get("name")
+                    .then((value) => showInfoDialog(
+                        context, "Get Data: ${value.data().toString()}"))
+                    .catchError((error) =>
+                        showErrorDialog(context, "Failed to get data: $error"));
+              },
+              child: const Text("getTest"),
+            ),
           ],
         ),
       ),

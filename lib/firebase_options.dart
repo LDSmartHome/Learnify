@@ -25,9 +25,11 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
+        return macos;
       case TargetPlatform.windows:
+        return windows;
       case TargetPlatform.linux:
-        return desktop;
+        return linux;
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -36,39 +38,62 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAg4N1X6WNNmzzGO4HFkXKoGUFyiX-2eFM',
-    appId: '1:168130109686:web:a05830370e0a0664da8cd7',
-    messagingSenderId: '168130109686',
-    projectId: 'learnify-931c8',
-    authDomain: 'learnify-931c8.firebaseapp.com',
-    storageBucket: 'learnify-931c8.appspot.com',
+    apiKey: 'AIzaSyAFvoWhQuIMQ6eo3qiIAFvbNHvkY268uzE',
+    appId: '1:507422081167:web:13df4c42e037cbeaa430fa',
+    messagingSenderId: '507422081167',
+    projectId: 'learnify-66272',
+    authDomain: 'learnify-66272.firebaseapp.com',
+    storageBucket: 'learnify-66272.appspot.com',
+    measurementId: 'G-QJY787PGDB',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD6zy0FxEIRhOeEnSFgowZyovFjEyNP8pY',
-    appId: '1:168130109686:android:6a86939b72e7a770da8cd7',
-    messagingSenderId: '168130109686',
-    projectId: 'learnify-931c8',
-    storageBucket: 'learnify-931c8.appspot.com',
+    apiKey: 'AIzaSyAdoALSThJxXR-c6VfhTdU8vEJZLU49xnw',
+    appId: '1:507422081167:android:76ce2b65aa8eb0c8a430fa',
+    messagingSenderId: '507422081167',
+    projectId: 'learnify-66272',
+    storageBucket: 'learnify-66272.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCI5Ah91PtXKua5qV1oFHTlrE3xZJMBVLA',
-    appId: '1:168130109686:ios:52cd1300b5a6aa98da8cd7',
-    messagingSenderId: '168130109686',
-    projectId: 'learnify-931c8',
-    storageBucket: 'learnify-931c8.appspot.com',
-    iosClientId: '168130109686-9arbprhvgjuu7d5b9pohlk98kugmpbau.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD4xLu4SNjDd3G154ScP3RXukTaOq-5XVo',
+    appId: '1:507422081167:ios:03d8779c4439fd8da430fa',
+    messagingSenderId: '507422081167',
+    projectId: 'learnify-66272',
+    storageBucket: 'learnify-66272.appspot.com',
+    iosClientId:
+        '507422081167-diush7td5bdo379rnf04ig58rfldfe6q.apps.googleusercontent.com',
     iosBundleId: 'com.example.learnify',
   );
 
-  static const FirebaseOptions desktop = FirebaseOptions(
-    apiKey: 'AIzaSyCI5Ah91PtXKua5qV1oFHTlrE3xZJMBVLA',
-    appId: '1:168130109686:ios:52cd1300b5a6aa98da8cd7',
-    messagingSenderId: '168130109686',
-    projectId: 'learnify-931c8',
-    storageBucket: 'learnify-931c8.appspot.com',
-    iosClientId: '168130109686-9arbprhvgjuu7d5b9pohlk98kugmpbau.apps.googleusercontent.com',
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD4xLu4SNjDd3G154ScP3RXukTaOq-5XVo',
+    appId: '1:507422081167:ios:03d8779c4439fd8da430fa',
+    messagingSenderId: '507422081167',
+    projectId: 'learnify-66272',
+    storageBucket: 'learnify-66272.appspot.com',
+    iosClientId:
+        '507422081167-diush7td5bdo379rnf04ig58rfldfe6q.apps.googleusercontent.com',
     iosBundleId: 'com.example.learnify',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAFvoWhQuIMQ6eo3qiIAFvbNHvkY268uzE',
+    appId: '1:507422081167:web:554fcaa6c6658f18a430fa',
+    messagingSenderId: '507422081167',
+    projectId: 'learnify-66272',
+    authDomain: 'learnify-66272.firebaseapp.com',
+    storageBucket: 'learnify-66272.appspot.com',
+    measurementId: 'G-81KXFQ7B8X',
+  );
+
+  static const FirebaseOptions linux = FirebaseOptions(
+    apiKey: 'AIzaSyAFvoWhQuIMQ6eo3qiIAFvbNHvkY268uzE',
+    appId: '1:507422081167:web:6f324029be8bd224a430fa',
+    messagingSenderId: '507422081167',
+    projectId: 'learnify-66272',
+    authDomain: 'learnify-66272.firebaseapp.com',
+    storageBucket: 'learnify-66272.appspot.com',
+    measurementId: 'G-2NJWVXDR0Z',
   );
 }

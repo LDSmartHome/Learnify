@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
@@ -25,33 +23,6 @@ class _SignUpScreen extends State<SignUpScreen> {
         Navigator.of(context).pushReplacementNamed("/");
       }
     });
-  }
-
-  showAlertDialog(String message) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Error"),
-      content: Text(message),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
   }
 
   @override
@@ -103,16 +74,16 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   try {
-                    UserCredential userCredential =
-                        await auth.createUserWithEmailAndPassword(
-                            email: _email.text, password: _password.text);
+                    await auth.createUserWithEmailAndPassword(
+                        email: _email.text, password: _password.text);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
-                      showAlertDialog('Password need to have at least 6 characters.');
+                      showErrorDialog(context,
+                          'Password need to have at least 6 characters.');
                     } else if (e.code == 'invalid-email') {
-                      showAlertDialog('Invalid email for that user.');
+                      showErrorDialog(context, 'Invalid email for that user.');
                     } else {
-                      showAlertDialog('Unknown Error: ${e.code}');
+                      showErrorDialog(context, 'Unknown Error: ${e.code}');
                     }
                   }
                 },

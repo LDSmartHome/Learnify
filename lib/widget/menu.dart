@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
@@ -24,11 +22,13 @@ class _MenuWidgetState extends State<MenuWidget> {
     super.initState();
 
     auth.authStateChanges().listen((User? user) {
-      if (user != null) {
-        setState(() {
+      setState(() {
+        if (user != null) {
           _loggedIn = true;
-        });
-      }
+        } else {
+          _loggedIn = false;
+        }
+      });
     });
   }
 

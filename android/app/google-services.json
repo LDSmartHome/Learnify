@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "168130109686",
-    "project_id": "learnify-931c8",
-    "storage_bucket": "learnify-931c8.appspot.com"
+    "project_number": "507422081167",
+    "project_id": "learnify-66272",
+    "storage_bucket": "learnify-66272.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:168130109686:android:6a86939b72e7a770da8cd7",
+        "mobilesdk_app_id": "1:507422081167:android:76ce2b65aa8eb0c8a430fa",
         "android_client_info": {
           "package_name": "com.example.learnify"
         }
       },
       "oauth_client": [
         {
-          "client_id": "168130109686-huop4s01n7d9pmtu3nl1il0k56mastcq.apps.googleusercontent.com",
+          "client_id": "507422081167-lhkn3ansj143mce93m30hls2tqec1k1q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6zy0FxEIRhOeEnSFgowZyovFjEyNP8pY"
+          "current_key": "AIzaSyAdoALSThJxXR-c6VfhTdU8vEJZLU49xnw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "168130109686-huop4s01n7d9pmtu3nl1il0k56mastcq.apps.googleusercontent.com",
+              "client_id": "507422081167-lhkn3ansj143mce93m30hls2tqec1k1q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

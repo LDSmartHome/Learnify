@@ -26,7 +26,7 @@ class _MenuItemsState extends State<MenuItems> {
           title: const Text("Home"),
           trailing: const Icon(Icons.home),
           onTap: () {
-            Navigator.of(context).pushReplacementNamed("/");
+            Navigator.of(context).pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
           },
         ),
         const Divider(),
@@ -35,14 +35,14 @@ class _MenuItemsState extends State<MenuItems> {
             title: const Text("Login"),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed("/login");
+              Navigator.of(context).pushNamedAndRemoveUntil("/login", (Route<dynamic> route) => false);
             },
           ),
           ListTile(
             title: const Text("Register"),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed("/register");
+              Navigator.of(context).pushNamedAndRemoveUntil("/register", (Route<dynamic> route) => false);
             },
           ),
         } else ...{
@@ -50,7 +50,7 @@ class _MenuItemsState extends State<MenuItems> {
             title: const Text("List"),
             trailing: const Icon(Icons.view_array),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed("/list");
+              Navigator.of(context).pushNamedAndRemoveUntil("/list", (Route<dynamic> route) => false);
             },
           ),
           ListTile(
@@ -58,7 +58,7 @@ class _MenuItemsState extends State<MenuItems> {
             trailing: const Icon(Icons.exit_to_app),
             onTap: () {
               auth.signOut();
-              Navigator.of(context).pushReplacementNamed("/");
+              Navigator.of(context).pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
             },
           ),
         }

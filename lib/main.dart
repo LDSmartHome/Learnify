@@ -5,6 +5,7 @@ import 'package:learnify/pages/home.dart';
 import 'package:learnify/pages/sign_in.dart';
 import 'package:learnify/pages/sign_up.dart';
 import 'package:learnify/pages/list_datasets.dart';
+import 'package:learnify/pages/view_dataset.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class SignUpApp extends StatelessWidget {
         '/login': (context) => const SignInScreen(),
         '/register': (context) => const SignUpScreen(),
         '/list': (context) => const ListDatasets(),
+        '/view': (context) => const ViewDataset(),
       },
     );
   }

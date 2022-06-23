@@ -20,7 +20,7 @@ class _SignUpScreen extends State<SignUpScreen> {
 
     auth.userChanges().listen((User? user) {
       if (user != null) {
-        Navigator.of(context).pushReplacementNamed("/");
+        Navigator.of(context).pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
       }
     });
   }
@@ -63,7 +63,7 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: Center(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed("/login");
+                    Navigator.of(context).pushNamedAndRemoveUntil("/login", (Route<dynamic> route) => false);
                   },
                   child: const Text("Have an account? Sign in!"),
                 ),

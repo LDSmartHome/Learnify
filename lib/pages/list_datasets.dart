@@ -19,7 +19,7 @@ class _ListDatasetsState extends State<ListDatasets> {
 
     auth.userChanges().listen((User? user) {
       if (user == null) {
-        Navigator.of(context).pushReplacementNamed("/");
+        Navigator.of(context).pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
       }
     });
   }
@@ -45,6 +45,9 @@ class _ListDatasetsState extends State<ListDatasets> {
                     ),
                     title: Text(data['name']),
                     subtitle: Text(data['description']),
+                    onTap: () {
+                      Navigator.of(context).pushNamed("/view", arguments: document.id);
+                    },
                   );
                 }).toList(),
               );

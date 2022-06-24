@@ -22,13 +22,15 @@ class _MenuWidgetState extends State<MenuWidget> {
     super.initState();
 
     auth.authStateChanges().listen((User? user) {
-      setState(() {
-        if (user != null) {
-          _loggedIn = true;
-        } else {
-          _loggedIn = false;
-        }
-      });
+      if(mounted) {
+        setState(() {
+          if (user != null) {
+            _loggedIn = true;
+          } else {
+            _loggedIn = false;
+          }
+        });
+      }
     });
   }
 

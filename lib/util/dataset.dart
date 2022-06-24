@@ -1,29 +1,54 @@
 import 'package:learnify/util/constants.dart';
 
 class DataSet {
-  static createData() {
-    return <String, String>{
-      "key1": "value2",
-    };
+  static createTestData() {
+    return <Map<String, String>>[
+      {
+        "key": "Test1",
+        "value": "Test2",
+      },
+      {
+        "key": "Test3",
+        "value": "Test4",
+      }
+    ];
   }
 
-  static create(String name, dynamic data, {String description = ""}) {
-    return firestore
-        .collection("data")
-        .doc("${auth.currentUser?.uid}_$name")
-        .set({
+  static create(String name, List<dynamic> data,
+      {String description = ""}) async {
+    firestore.collection("data").doc("${auth.currentUser?.uid}_$name").set({
       "auth_uid": "${auth.currentUser?.uid}",
       "name": name,
       "description": description,
       "type": "KeyValue",
-      "data": data,
+      "private": false,
     });
+
+    for (dynamic temp in data) {
+      firestore
+          .collection("data")
+          .doc("${auth.currentUser?.uid}_$name")
+          .collection("data")
+          .add(temp);
+    }
   }
 
-  static get(String name) {
+  static getInfo(String name) {
     return firestore
         .collection("data")
         .doc("${auth.currentUser?.uid}_$name")
+        .get();
+  }
+
+  static getDataByName(String name) {
+    return getDataByID("${auth.currentUser?.uid}_$name");
+  }
+
+  static getDataByID(String id) {
+    return firestore
+        .collection("data")
+        .doc(id)
+        .collection("data")
         .get();
   }
 

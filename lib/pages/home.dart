@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
 import 'package:learnify/util/dataset.dart';
@@ -22,22 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text("Home"),
             ElevatedButton(
               onPressed: () {
-                DataSet.create("name1", DataSet.createData())
+                DataSet.create("name", DataSet.createTestData(), description: "Test")
                     .then((value) => showInfoDialog(context, "Data Added"))
                     .catchError((error) =>
                         showErrorDialog(context, "Failed to add data: $error"));
               },
               child: const Text("addTest"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                DataSet.get("name")
-                    .then((value) => showInfoDialog(
-                        context, "Get Data: ${value.data().toString()}"))
-                    .catchError((error) =>
-                        showErrorDialog(context, "Failed to get data: $error"));
-              },
-              child: const Text("getTest"),
             ),
           ],
         ),

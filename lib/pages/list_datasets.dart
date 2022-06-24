@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
 import 'package:learnify/util/dataset.dart';
 import 'package:learnify/widget/menu.dart';
+import 'package:tuple/tuple.dart';
 
 class ListDatasets extends StatefulWidget {
   const ListDatasets({Key? key}) : super(key: key);
@@ -19,7 +21,8 @@ class _ListDatasetsState extends State<ListDatasets> {
 
     auth.userChanges().listen((User? user) {
       if (user == null) {
-        Navigator.of(context).pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
       }
     });
   }
@@ -46,11 +49,14 @@ class _ListDatasetsState extends State<ListDatasets> {
                     title: Text(data['name']),
                     subtitle: Text(data['description']),
                     onTap: () {
-                      Navigator.of(context).pushNamed("/view", arguments: document.id);
+                      Navigator.of(context)
+                          .pushNamed("/view", arguments: document.id);
                     },
                   );
                 }).toList(),
               );
+            } else if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
             } else {
               return const CircularProgressIndicator();
             }

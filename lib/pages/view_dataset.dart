@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:learnify/util/constants.dart';
 import 'package:learnify/util/dataset.dart';
 import 'package:learnify/widget/menu.dart';
 
@@ -13,7 +14,12 @@ class ViewDataset extends StatefulWidget {
 class _ViewDatasetState extends State<ViewDataset> {
   @override
   Widget build(BuildContext context) {
-    final datasetDoc = ModalRoute.of(context)!.settings.arguments as String;
+    final args = ModalRoute.of(context)!.settings.arguments as String?;
+
+    final check = checkRouteArg(context, args, "/list");
+    if (check != null) return check;
+
+    final datasetDoc = args as String;
 
     return MenuWidget(
       title: "View",
@@ -50,7 +56,8 @@ class _ViewDatasetState extends State<ViewDataset> {
                     Card(
                       child: ListTile(
                         title: const Text("Private"),
-                        subtitle: Text(snapshot.data![1].data()["private"].toString()),
+                        subtitle: Text(
+                            snapshot.data![1].data()["private"].toString()),
                       ),
                     ),
                     const Divider(),

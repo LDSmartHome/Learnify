@@ -22,7 +22,7 @@ class _MenuWidgetState extends State<MenuWidget> {
     super.initState();
 
     auth.authStateChanges().listen((User? user) {
-      if(mounted) {
+      if (mounted) {
         setState(() {
           if (user != null) {
             _loggedIn = true;

@@ -20,7 +20,7 @@ class _MenuItemsState extends State<MenuItems> {
 
     auth.userChanges().listen((User? user) {
       if (user != null) {
-        if(mounted) {
+        if (mounted) {
           setState(() {
             _profile = user.email.toString();
           });

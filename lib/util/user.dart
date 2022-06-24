@@ -17,7 +17,8 @@ class UserManager {
     required String email,
     required String password,
   }) {
-    return auth.createUserWithEmailAndPassword(email: email, password: password);
+    return auth.createUserWithEmailAndPassword(
+        email: email, password: password);
   }
 
   static User? getUser() {

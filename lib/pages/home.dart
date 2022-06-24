@@ -22,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text("Home"),
             ElevatedButton(
               onPressed: () {
-                DataSet.create("name", DataSet.createTestData(), description: "Test")
+                DataSet.create("name", DataSet.createTestData(),
+                        description: "Test")
                     .then((value) => showInfoDialog(context, "Data Added"))
                     .catchError((error) =>
                         showErrorDialog(context, "Failed to add data: $error"));

@@ -39,3 +39,15 @@ showAlertDialog(BuildContext context, String message, String title) {
     },
   );
 }
+
+Widget? checkRouteArg(BuildContext context, dynamic arg, String route) {
+  if (arg == null) {
+    Future.delayed(Duration.zero).then((_) {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
+    });
+    return Container();
+  }
+
+  return null;
+}

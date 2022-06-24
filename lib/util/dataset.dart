@@ -18,7 +18,10 @@ class DataSet {
 
   static create(String name, List<dynamic> data,
       {String description = ""}) async {
-    firestore.collection("data").doc("${UserManager.getUser()?.uid}_$name").set({
+    firestore
+        .collection("data")
+        .doc("${UserManager.getUser()?.uid}_$name")
+        .set({
       "auth_uid": "${UserManager.getUser()?.uid}",
       "name": name,
       "description": description,
@@ -35,27 +38,22 @@ class DataSet {
     }
   }
 
-  static Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfoByName(String name) {
+  static Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfoByName(
+      String name) {
     return getInfoByID("${UserManager.getUser()?.uid}_$name");
   }
 
   static Future<DocumentSnapshot<Map<String, dynamic>>> getInfoByID(String id) {
-    return firestore
-        .collection("data")
-        .doc(id)
-        .get();
+    return firestore.collection("data").doc(id).get();
   }
 
-  static Future<QuerySnapshot<Map<String, dynamic>>> getUserDataByName(String name) {
+  static Future<QuerySnapshot<Map<String, dynamic>>> getUserDataByName(
+      String name) {
     return getDataByID("${UserManager.getUser()?.uid}_$name");
   }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getDataByID(String id) {
-    return firestore
-        .collection("data")
-        .doc(id)
-        .collection("data")
-        .get();
+    return firestore.collection("data").doc(id).collection("data").get();
   }
 
   static Future<QuerySnapshot<Map<String, dynamic>>> getAllData() {

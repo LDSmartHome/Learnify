@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:learnify/util/constants.dart';
+import 'package:learnify/util/user.dart';
 
 class DataSet {
-  static createTestData() {
+  static List<Map<String, String>> createTestData() {
     return <Map<String, String>>[
       {
         "key": "Test1",
@@ -16,8 +18,8 @@ class DataSet {
 
   static create(String name, List<dynamic> data,
       {String description = ""}) async {
-    firestore.collection("data").doc("${auth.currentUser?.uid}_$name").set({
-      "auth_uid": "${auth.currentUser?.uid}",
+    firestore.collection("data").doc("${UserManager.getUser()?.uid}_$name").set({
+      "auth_uid": "${UserManager.getUser()?.uid}",
       "name": name,
       "description": description,
       "type": "KeyValue",
@@ -27,24 +29,28 @@ class DataSet {
     for (dynamic temp in data) {
       firestore
           .collection("data")
-          .doc("${auth.currentUser?.uid}_$name")
+          .doc("${UserManager.getUser()?.uid}_$name")
           .collection("data")
           .add(temp);
     }
   }
 
-  static getInfo(String name) {
+  static Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfoByName(String name) {
+    return getInfoByID("${UserManager.getUser()?.uid}_$name");
+  }
+
+  static Future<DocumentSnapshot<Map<String, dynamic>>> getInfoByID(String id) {
     return firestore
         .collection("data")
-        .doc("${auth.currentUser?.uid}_$name")
+        .doc(id)
         .get();
   }
 
-  static getUserDataByName(String name) {
-    return getDataByID("${auth.currentUser?.uid}_$name");
+  static Future<QuerySnapshot<Map<String, dynamic>>> getUserDataByName(String name) {
+    return getDataByID("${UserManager.getUser()?.uid}_$name");
   }
 
-  static getDataByID(String id) {
+  static Future<QuerySnapshot<Map<String, dynamic>>> getDataByID(String id) {
     return firestore
         .collection("data")
         .doc(id)
@@ -52,7 +58,7 @@ class DataSet {
         .get();
   }
 
-  static getAllData() {
+  static Future<QuerySnapshot<Map<String, dynamic>>> getAllData() {
     return firestore.collection("data").get();
   }
 }

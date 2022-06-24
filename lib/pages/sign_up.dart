@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
+import 'package:learnify/util/user.dart';
 import 'package:learnify/widget/menu.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -20,7 +21,8 @@ class _SignUpScreen extends State<SignUpScreen> {
 
     auth.userChanges().listen((User? user) {
       if (user != null) {
-        Navigator.of(context).pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
       }
     });
   }
@@ -63,7 +65,8 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: Center(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil("/login", (Route<dynamic> route) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        "/login", (Route<dynamic> route) => false);
                   },
                   child: const Text("Have an account? Sign in!"),
                 ),
@@ -74,7 +77,7 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   try {
-                    await auth.createUserWithEmailAndPassword(
+                    await UserManager.register(
                         email: _email.text, password: _password.text);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {

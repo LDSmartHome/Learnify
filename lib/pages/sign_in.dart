@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
+import 'package:learnify/util/user.dart';
 import 'package:learnify/widget/menu.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _SignInScreen extends State<SignInScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   try {
-                    await auth.signInWithEmailAndPassword(
+                    await UserManager.login(
                         email: _email.text, password: _password.text);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'wrong-password') {

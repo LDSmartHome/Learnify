@@ -18,25 +18,59 @@ class _ViewDatasetState extends State<ViewDataset> {
     return MenuWidget(
       title: "View",
       body: Center(
-        child: FutureBuilder<QuerySnapshot>(
-            future: DataSet.getDataByID(datasetDoc),
+        child: FutureBuilder<List<dynamic>>(
+            future: Future.wait([
+              DataSet.getDataByID(datasetDoc),
+              DataSet.getInfoByID(datasetDoc),
+            ]),
             builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
                 return ListView(
-                  children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                    document.data()! as Map<String, dynamic>;
-                    return ListTile(
-                      leading: const Icon(Icons.list),
-                      trailing: Text(
-                        document.id,
-                        style: const TextStyle(color: Colors.green, fontSize: 15),
+                  padding: const EdgeInsets.all(10),
+                  children: [
+                    Card(
+                      child: ListTile(
+                        title: const Text("Name"),
+                        subtitle: Text(snapshot.data![1].data()["name"]),
                       ),
-                      title: Text(data['key']),
-                      subtitle: Text(data['value']),
-                    );
-                  }).toList(),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: const Text("Description"),
+                        subtitle: Text(snapshot.data![1].data()["description"]),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: const Text("Type"),
+                        subtitle: Text(snapshot.data![1].data()["type"]),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: const Text("Private"),
+                        subtitle: Text(snapshot.data![1].data()["private"].toString()),
+                      ),
+                    ),
+                    const Divider(),
+                    ...snapshot.data![0].docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data()! as Map<String, dynamic>;
+                      return Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.list),
+                          trailing: Text(
+                            document.id,
+                            style: const TextStyle(
+                                color: Colors.green, fontSize: 15),
+                          ),
+                          title: Text(data['key']),
+                          subtitle: Text(data['value']),
+                        ),
+                      );
+                    }).toList(),
+                  ],
                 );
               } else if (snapshot.hasError) {
                 return Text(snapshot.error.toString());

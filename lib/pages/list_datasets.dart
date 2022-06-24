@@ -16,18 +16,6 @@ class ListDatasets extends StatefulWidget {
 
 class _ListDatasetsState extends State<ListDatasets> {
   @override
-  void initState() {
-    super.initState();
-
-    auth.userChanges().listen((User? user) {
-      if (user == null) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MenuWidget(
       title: "List",

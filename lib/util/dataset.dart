@@ -40,7 +40,7 @@ class DataSet {
         .get();
   }
 
-  static getDataByName(String name) {
+  static getUserDataByName(String name) {
     return getDataByID("${auth.currentUser?.uid}_$name");
   }
 
@@ -52,7 +52,7 @@ class DataSet {
         .get();
   }
 
-  static getUserData() {
+  static getAllData() {
     return firestore.collection("data").get();
   }
 }

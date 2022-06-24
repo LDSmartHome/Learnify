@@ -20,7 +20,7 @@ class _ListDatasetsState extends State<ListDatasets> {
     return MenuWidget(
       title: "List",
       body: FutureBuilder<QuerySnapshot>(
-          future: DataSet.getUserData(),
+          future: DataSet.getAllData(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {

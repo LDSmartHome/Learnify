@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
@@ -15,16 +17,24 @@ class _SignInScreen extends State<SignInScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
+  late StreamSubscription<User?> _subscription;
+
   @override
   void initState() {
     super.initState();
 
-    auth.userChanges().listen((User? user) {
+    _subscription = auth.userChanges().listen((User? user) {
       if (user != null) {
         Navigator.of(context)
             .pushNamedAndRemoveUntil("/", (Route<dynamic> route) => false);
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _subscription.cancel();
   }
 
   @override

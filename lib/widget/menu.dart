@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
@@ -17,11 +19,13 @@ class MenuWidget extends StatefulWidget {
 class _MenuWidgetState extends State<MenuWidget> {
   bool _loggedIn = false;
 
+  late StreamSubscription<User?> _subscription;
+
   @override
   void initState() {
     super.initState();
 
-    auth.authStateChanges().listen((User? user) {
+    _subscription = auth.authStateChanges().listen((User? user) {
       if (mounted) {
         setState(() {
           if (user != null) {
@@ -32,6 +36,12 @@ class _MenuWidgetState extends State<MenuWidget> {
         });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _subscription.cancel();
   }
 
   @override

@@ -14,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreen extends State<SignUpScreen> {
+  final TextEditingController _user = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -54,6 +55,14 @@ class _SignUpScreen extends State<SignUpScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
+                controller: _user,
+                decoration: const InputDecoration(labelText: "User"),
+                textInputAction: TextInputAction.next,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
                 controller: _email,
                 decoration: const InputDecoration(labelText: "Email"),
                 textInputAction: TextInputAction.next,
@@ -87,7 +96,7 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   try {
-                    await UserManager.register(
+                    await UserManager.register( username: _user.text,
                         email: _email.text, password: _password.text);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {

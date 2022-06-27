@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify/util/constants.dart';
 import 'package:learnify/util/dataset.dart';
+import 'package:learnify/util/user.dart';
 import 'package:learnify/widget/menu.dart';
 
 class ViewDataset extends StatefulWidget {
@@ -45,6 +46,24 @@ class _ViewDatasetState extends State<ViewDataset> {
                       child: ListTile(
                         title: const Text("Description"),
                         subtitle: Text(snapshot.data![1].data()["description"]),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: const Text("User"),
+                        subtitle: FutureBuilder<DocumentSnapshot>(
+                            future: UserManager.getUserInfo(
+                                snapshot.data![1].data()["auth_uid"]),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<DocumentSnapshot> snapshot) {
+                              if (snapshot.hasData) {
+                                return Text(snapshot.data!["user"].toString());
+                              } else if(snapshot.hasError) {
+                                return Text(snapshot.error.toString());
+                              } else {
+                                return const LinearProgressIndicator();
+                              }
+                            }),
                       ),
                     ),
                     Card(

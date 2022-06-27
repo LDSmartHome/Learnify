@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	function signedIn() {
+      return request.auth.uid != null;
+    }
+    
+    match /users/{user}{
+    	allow write;
+    	allow read;
+    }
+    
+    match /data/{dataset} {
+    	function isOwner(){
+        return get(/databases/$(database)/documents/data/$(dataset)).data.auth_uid == request.auth.uid;
+      }
+
+      function isPublic() {
+        return !get(/databases/$(database)/documents/data/$(dataset)).data.private;
+      }
+      
+      function isValid() {
+      	return request.resource.data.auth_uid == request.auth.uid;
+      }
+    
+    	allow write: if signedIn() && isValid();
+      allow update: if signedIn() && isValid() && isOwner();
+      allow read;
+      
+      match /data/{item} {
+      	allow write: if signedIn() && isOwner();
+        allow read: if isOwner() || isPublic();
+      }
+    }
+  }
+}
